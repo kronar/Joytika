@@ -13,49 +13,50 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class JoytikaAction {
 
     static WebDriver driver = new FirefoxDriver();
-   // driver.get("http://www.joytika.com");
-   protected static void init () {
+
+    // driver.get("http://www.joytika.com");
+    protected static void init() {
 
     }
-    static void tutorClickButton(){
-        WebElement element = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _dota _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content']/div[@class='block-greetings-inner-button']/div[@class='chart--content-button windowClose']"));
+
+    static void tutorClickButton() {
+        WebElement element = driver.findElement(By.xpath(JoytikaXpath.tutorButton));
         element.click();
     }
 
     static void tutorClickCross() {
-        WebElement cross = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='modal-tutor js-login _dota _active']/div[@id='blockLogin']/div[@class='block-tutor-inner']/div[@class='block-tutor-inner-close windowClose']"));
+        WebElement cross = driver.findElement(By.xpath(JoytikaXpath.cross));
         cross.click();
     }
 
     static void openMenu() {
-        WebElement menu = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Header-fixed _animation']/div[@class='Header-menu']"));
+        WebElement menu = driver.findElement(By.xpath(JoytikaXpath.leftmenu));
         menu.click();
     }
 
-    static void myAccountClick () {
-        WebElement myaccount = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a[@class='ripple Nav-item '][1]"));
+    static void myAccountClick() {
+        WebElement myaccount = driver.findElement(By.xpath(JoytikaXpath.Menu.myaccount));
         myaccount.click();
     }
 
-    static void login (String vkName, String vkPassword) {
+    static void login(String vkName, String vkPassword) {
 
-        WebDriverWait wait = new WebDriverWait(driver,300);
+        WebDriverWait wait = new WebDriverWait(driver, 300);
 
         JoytikaAction.openMenu();
         JoytikaAction.myAccountClick();
 
-        WebElement loginButton = driver.findElement(By.xpath(".//*[@id='blockLogin']/div/div[4]"));
+        WebElement loginButton = driver.findElement(By.xpath(JoytikaXpath.LoginWindow.loginButton));
         loginButton.click();
 
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='box']/div/input[6]")));
-
-        WebElement vkLoginField = driver.findElement(By.xpath(".//*[@id='box']/div/input[6]"));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(JoytikaXpath.LoginWindow.loginBox)));
+        WebElement vkLoginField = driver.findElement(By.xpath(JoytikaXpath.LoginWindow.vkLoginField));
         vkLoginField.sendKeys(vkName);
 
-        WebElement vkPasswordField = driver.findElement(By.xpath(".//*[@id='box']/div/input[7]"));
+        WebElement vkPasswordField = driver.findElement(By.xpath(JoytikaXpath.LoginWindow.vkPasswordField));
         vkPasswordField.sendKeys(vkPassword);
 
-        WebElement vkLoginButton= driver.findElement(By.xpath(".//*[@id='install_allow']"));
+        WebElement vkLoginButton = driver.findElement(By.xpath(JoytikaXpath.LoginWindow.vkLoginButton));
         vkLoginButton.click();
 
     }
