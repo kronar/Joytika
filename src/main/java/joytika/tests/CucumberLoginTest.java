@@ -1,25 +1,24 @@
 package joytika.tests;
 
-
-
 import cucumber.annotation.en.Given;
 import cucumber.annotation.en.Then;
 import cucumber.annotation.en.When;
-import static org.junit.Assert.assertTrue;
+
 
 import org.junit.Assert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
-import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class CucumberLoginTest {
-    WebDriver driver = new FirefoxDriver();
-    WebDriverWait wait = new WebDriverWait(driver,300);
+    WebDriver driver;
+    WebDriverWait wait;
 
     public void webDriverInit(){
+        driver = WebDriverHelper.getCurrentDriver();
+        wait = WebDriverHelper.getCurrentDriverWait();
         driver.get("http://www.joytika.com");
     }
 
@@ -53,7 +52,7 @@ public class CucumberLoginTest {
         vkLoginButton.click();
     }
 
-    @Then("^Visitor should see that I logged in successfully$")
+    @Then("^Visitor should see that he logged in successfully$")
     public void checkSiteHeader(){
         WebElement userNameAfter = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Header-fixed _animation']/div[@class='Header-fixed-righttext js-scrollto']/a[@class='Header-fixed-righttext-text']"));
         final String nickAfter = userNameAfter.getText();
