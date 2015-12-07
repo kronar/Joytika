@@ -37,9 +37,9 @@ public class WebDriverHelper {
     public static void close() {
         try {
             getCurrentDriver().quit();
-            driver = null;
+           driver = null;
         } catch (UnreachableBrowserException e) {
-            ///some log
+            //some log
         }
     }
 }
