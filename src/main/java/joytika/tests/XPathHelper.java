@@ -3,7 +3,7 @@ package joytika.tests;
 /**
  * Created by MashaN on 04.12.2015.
  */
-public class JoytikaXpath {
+public class XPathHelper {
     public static String tutorButton = "/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _dota _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content']/div[@class='block-greetings-inner-button']/div[@class='chart--content-button windowClose']";
     public static String cross = "/html/body[@id='body']/div[@class='modal-tutor js-login _dota _active']/div[@id='blockLogin']/div[@class='block-tutor-inner']/div[@class='block-tutor-inner-close windowClose']";
     public static String leftmenu = "/html/body[@id='body']/div[@class='Header-fixed _animation']/div[@class='Header-menu']";

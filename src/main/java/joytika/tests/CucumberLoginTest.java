@@ -2,17 +2,23 @@ package joytika.tests;
 
 
 
-import cucumber.annotation.en.Given;
-import cucumber.annotation.en.Then;
-import cucumber.annotation.en.When;
+import cucumber.api.Scenario;
+import cucumber.api.java.After;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
+import net.lightbody.bmp.core.har.Har;
 import org.junit.Assert;
+import org.openqa.selenium.OutputType;
+import org.openqa.selenium.TakesScreenshot;
 
 
 public class CucumberLoginTest {
     private JoytikaHelper joytika = new JoytikaHelper("http://www.joytika.com");
 
     @Given("^Visitor is not logged in$")
-    public void visitorWantsToLogin() {
+    public void visitorWantsToLogin() throws Exception {
+        ProxyServer.doHar();
         joytika.pressButtonPlayFromGreetingIfGreetingIsVisible();
         joytika.logoutIfNot();
     }
@@ -36,6 +42,8 @@ public class CucumberLoginTest {
 
     @Then("^Visitor does not see additional tabs$")
     public void checkAdditionalTabsIsNotVisible() {
+        Har har = ProxyServer.getHar();
+      //  HarParser.writeHARDataInFile(har);
         Assert.assertFalse(joytika.additionalTabsIsVisible());
     }
 

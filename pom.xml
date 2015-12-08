@@ -16,24 +16,53 @@
         </dependency>
 
         <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-api</artifactId>
+            <version>2.48.2</version>
+        </dependency>
+
+        <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-java</artifactId>
-            <version>1.0.0</version>
+            <version>1.2.4</version>
 
         </dependency>
         <dependency>
             <groupId>info.cukes</groupId>
             <artifactId>cucumber-junit</artifactId>
-            <version>1.0.0</version>
+            <version>1.2.4</version>
 
         </dependency>
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
-            <version>4.10</version>
-
+            <version>4.12</version>
         </dependency>
 
-    </dependencies>
+        <dependency>
+            <groupId>org.glassfish.main.extras</groupId>
+            <artifactId>glassfish-embedded-web</artifactId>
+            <version>4.0-b72</version>
+        </dependency>
 
+        <dependency>
+            <groupId>net.lightbody.bmp</groupId>
+            <artifactId>browsermob-core</artifactId>
+            <version>2.1.0-beta-3</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.lightbody.bmp</groupId>
+            <artifactId>browsermob-core-littleproxy</artifactId>
+            <version>2.1.0-beta-3</version>
+        </dependency>
+        <dependency>
+            <groupId>edu.umass.cs.benchlab</groupId>
+            <artifactId>harlib</artifactId>
+            <version>1.1.2</version>
+        </dependency>
+
+
+
+    </dependencies>
 </project>
