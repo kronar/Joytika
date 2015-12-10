@@ -9,45 +9,55 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class JoytikaHelper {
 
-    private WebDriver driver;
-    private WebDriverWait wait;
+    private static WebDriver driver;
+    private static WebDriverWait wait;
 
-    JoytikaHelper(final String site) {
+    protected static void init(final String site) {
         driver = WebDriverHelper.getCurrentDriver();
         wait = WebDriverHelper.getCurrentDriverWait();
         driver.get(site);
     }
 
-    protected void loginIfNotLogin(final String username, final String password) {
+    protected static void initIfNot(final String site) {
+        if (!isInit()) {
+            init(site);
+        }
+    }
+
+    private static boolean isInit() {
+        return driver != null && wait != null;
+    }
+
+    protected static void loginIfNotLogin(final String username, final String password) {
         if (!userIsLogin()) {
             login(username, password);
         }
     }
 
-    private void login(final String username, final String password) {
+    private static void login(final String username, final String password) {
         openMenuItemMyAccount();
         pressButtonLoginFromNeedLoginWindow();
         loginInVKLoginForm(username, password);
     }
 
-    protected void openMenu() {
+    protected static void openMenu() {
         WebElement menu = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Header-fixed _animation']/div[@class='Header-menu']"));
         menu.click();
     }
 
-    protected void openMenuItemMyAccount() {
+    protected static void openMenuItemMyAccount() {
         openMenu();
         WebElement myAccountMenuItem = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a[@class='ripple Nav-item '][1]"));
         myAccountMenuItem.click();
     }
 
 
-    protected void pressButtonLoginFromNeedLoginWindow() {
+    protected static void pressButtonLoginFromNeedLoginWindow() {
         WebElement loginButton = driver.findElement(By.xpath(".//*[@id='blockLogin']/div/div[4]"));
         loginButton.click();
     }
 
-    protected void loginInVKLoginForm(final String vkUsername, final String vkPassword) {
+    protected static void loginInVKLoginForm(final String vkUsername, final String vkPassword) {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='box']/div/input[6]")));
 
         WebElement vkLoginField = driver.findElement(By.xpath(".//*[@id='box']/div/input[6]"));
@@ -60,12 +70,12 @@ public class JoytikaHelper {
         vkLoginButton.click();
     }
 
-    protected String getAccountNick() {
+    protected static String getAccountNick() {
         WebElement userNameAfter = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Header-fixed _animation']/div[@class='Header-fixed-righttext js-scrollto']/a[@class='Header-fixed-righttext-text']"));
         return userNameAfter.getText();
     }
 
-    protected boolean userIsLogin() {
+    protected static boolean userIsLogin() {
         return !"Войти".equals(getAccountNick());
     }
 
@@ -73,26 +83,26 @@ public class JoytikaHelper {
         //TODO
     }
 
-    private void logout() {
+    private static void logout() {
         openMenuItemMyAccount();
         WebElement logOutButton = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='chart--newrecord']/div[@class='block-profile']/div[@class='block-profile-text']/a[@class='block-profile-text-logout']"));
         logOutButton.click();
     }
 
-    protected void logoutIfNot() {
+    protected static void logoutIfNot() {
         if (userIsLogin()) {
             logout();
         }
     }
 
-    protected void pressButtonPlayFromGreetingIfGreetingIsVisible() {
+    protected static void pressButtonPlayFromGreetingIfGreetingIsVisible() {
         if (greetingIsVisible()) {
             WebElement playButton = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _dota _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content']/div[@class='block-greetings-inner-button']/div[@class='chart--content-button windowClose']"));
             playButton.click();
         }
     }
 
-    private boolean greetingIsVisible() {
+    private static boolean greetingIsVisible() {
         try {
             WebElement greeting = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _dota _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content']"));
             return greeting.isDisplayed();
@@ -101,13 +111,13 @@ public class JoytikaHelper {
         }
     }
 
-    public void goToThePastTab() {
+    public static void pressToThePastTab() {
         wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='block-tabs js-site-tabs']/div[@class='block-tabs-item js-head-tab'][1]")));
         WebElement pastButton = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='block-tabs js-site-tabs']/div[@class='block-tabs-item js-head-tab'][1]"));
         pastButton.click();
     }
 
-    public boolean additionalTabsIsVisible() {
+    public static boolean additionalTabsIsVisible() {
         return driver.findElement(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='block-tabssmall js-site-tabs']/div[@class='block-tabssmall-item js-head-tab'][1]")).isDisplayed();
     }
 

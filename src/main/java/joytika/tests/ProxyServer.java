@@ -20,14 +20,15 @@ public class ProxyServer {
 
 
     protected static void start() throws Exception {
-        serverIsStart = true;
-        proxyServer = new BrowserMobProxyServer();
-        proxyServer.start(4444);
-        Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxyServer);
-        DesiredCapabilities capabilities = new DesiredCapabilities();
-        capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
-        driver = new FirefoxDriver(capabilities);
-
+        if (!serverIsStart) {
+            serverIsStart = true;
+            proxyServer = new BrowserMobProxyServer();
+            proxyServer.start(4444);
+            Proxy seleniumProxy = ClientUtil.createSeleniumProxy(proxyServer);
+            DesiredCapabilities capabilities = new DesiredCapabilities();
+            capabilities.setCapability(CapabilityType.PROXY, seleniumProxy);
+            driver = new FirefoxDriver(capabilities);
+        }
     }
 
     public static void stop() {
@@ -56,6 +57,6 @@ public class ProxyServer {
 
     @Nullable
     protected static Har getHar() {
-        return serverIsStart? proxyServer.getHar():null;
+        return serverIsStart ? proxyServer.getHar() : null;
     }
 }
