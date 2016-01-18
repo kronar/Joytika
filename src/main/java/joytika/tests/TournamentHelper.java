@@ -27,7 +27,7 @@ public class TournamentHelper {
         return null;
     }
 
-// постоянно меняются цвета
+// TODO передалать на поиск по классу в объекте
     private static void initCurrentTournament() {
         currentTournaments.clear();
 

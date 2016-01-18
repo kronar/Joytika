@@ -1,6 +1,5 @@
 package joytika.tests;
 
-import cucumber.api.PendingException;
 import cucumber.api.Scenario;
 import cucumber.api.java.After;
 import cucumber.api.java.Before;
@@ -8,7 +7,6 @@ import cucumber.api.java.en.And;
 import cucumber.api.java.en.Given;
 import cucumber.api.java.en.Then;
 import cucumber.api.java.en.When;
-import net.lightbody.bmp.core.har.Har;
 import org.junit.Assert;
 
 
@@ -16,13 +14,12 @@ public class CucumberLoginTest {
 
     @Before
     public void doHar() throws Exception {
-        JoytikaHelper.initIfNot(CucumperAnalyticsSteps.SITE);
+        JoytikaHelper.initIfNot(СucumberAnalyticsSteps.SITE);
         ProxyServer.doHar();
    }
 
     @Given("^Пользователь не залогинен$")
     public void visitorWantsToLogin() throws Exception {
-       // ProxyServer.doHar();
         JoytikaHelper.pressButtonPlayFromGreetingIfGreetingIsVisible();
         JoytikaHelper.logoutIfNot();
     }
