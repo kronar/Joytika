@@ -9,13 +9,25 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 public class JoytikaHelper {
 
+
     private static WebDriver driver;
+
+
     private static WebDriverWait wait;
+
 
     protected static void init(final String site) {
         driver = WebDriverHelper.getCurrentDriver();
         wait = WebDriverHelper.getCurrentDriverWait();
         driver.get(site);
+    }
+
+    public static WebDriver getDriver() {
+        return driver;
+    }
+
+    public static WebDriverWait getWait() {
+        return wait;
     }
 
     protected static void initIfNot(final String site) {
@@ -35,43 +47,36 @@ public class JoytikaHelper {
     }
 
     private static void login(final String username, final String password) {
-        openMenuItemMyAccount();
+        Menu.openMenuItem("Мой аккаунт");
         pressButtonLoginFromNeedLoginWindow();
         loginInVKLoginForm(username, password);
     }
 
     protected static void openMenu() {
-        WebElement menu = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Header-fixed _animation']/div[@class='Header-menu']"));
-        menu.click();
-    }
-
-    protected static void openMenuItemMyAccount() {
-        openMenu();
-        WebElement myAccountMenuItem = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a[@class='ripple Nav-item '][1]"));
-        myAccountMenuItem.click();
+        Menu.openMenu();
     }
 
 
     protected static void pressButtonLoginFromNeedLoginWindow() {
-        WebElement loginButton = driver.findElement(By.xpath(".//*[@id='blockLogin']/div/div[4]"));
+        WebElement loginButton = driver.findElement(By.xpath(XPath.LoginWindow.loginButton));
         loginButton.click();
     }
 
     protected static void loginInVKLoginForm(final String vkUsername, final String vkPassword) {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(".//*[@id='box']/div/input[6]")));
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPath.LoginWindow.VKLogin.vkLoginField)));
 
-        WebElement vkLoginField = driver.findElement(By.xpath(".//*[@id='box']/div/input[6]"));
+        WebElement vkLoginField = driver.findElement(By.xpath(XPath.LoginWindow.VKLogin.vkLoginField));
         vkLoginField.sendKeys(vkUsername);
 
-        WebElement vkPasswordField = driver.findElement(By.xpath(".//*[@id='box']/div/input[7]"));
+        WebElement vkPasswordField = driver.findElement(By.xpath(XPath.LoginWindow.VKLogin.vkPasswordField));
         vkPasswordField.sendKeys(vkPassword);
 
-        WebElement vkLoginButton = driver.findElement(By.xpath(".//*[@id='install_allow']"));
+        WebElement vkLoginButton = driver.findElement(By.xpath(XPath.LoginWindow.VKLogin.vkLoginButton));
         vkLoginButton.click();
     }
 
     protected static String getAccountNick() {
-        WebElement userNameAfter = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='Header-fixed _animation']/div[@class='Header-fixed-righttext js-scrollto']/a[@class='Header-fixed-righttext-text']"));
+        WebElement userNameAfter = driver.findElement(By.xpath(XPath.userNickInHeader));
         return userNameAfter.getText();
     }
 
@@ -84,8 +89,8 @@ public class JoytikaHelper {
     }
 
     private static void logout() {
-        openMenuItemMyAccount();
-        WebElement logOutButton = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='chart--newrecord']/div[@class='block-profile']/div[@class='block-profile-text']/a[@class='block-profile-text-logout']"));
+        Menu.openMenuItem("Мой аккаунт");
+        WebElement logOutButton = driver.findElement(By.xpath(XPath.MyAccount.logOutButton));
         logOutButton.click();
     }
 
@@ -97,31 +102,45 @@ public class JoytikaHelper {
 
     protected static void pressButtonPlayFromGreetingIfGreetingIsVisible() {
         if (greetingIsVisible()) {
-            WebElement playButton = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _dota _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content']/div[@class='block-greetings-inner-button']/div[@class='chart--content-button windowClose']"));
+            WebElement playButton = driver.findElement(By.xpath(XPath.Greeting.greetingPlayButton));
             playButton.click();
         }
     }
 
     private static boolean greetingIsVisible() {
         try {
-            WebElement greeting = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _dota _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content']"));
+            WebElement greeting = driver.findElement(By.xpath(XPath.Greeting.greeting));
             return greeting.isDisplayed();
         } catch (NoSuchElementException nsee) {
             return false;
         }
     }
 
-    public static void pressToThePastTab() {
-        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='block-tabs js-site-tabs']/div[@class='block-tabs-item js-head-tab'][1]")));
-        WebElement pastButton = driver.findElement(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='block-tabs js-site-tabs']/div[@class='block-tabs-item js-head-tab'][1]"));
-        pastButton.click();
+
+    public static void pressToTheTournament(final int tour_id) {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='chart--content-blocks js-head-block _active']/div[@class='block-games-item js-tournament-item'][1]/div[@class='block-games-item-wrap']/div[@class='block-games-item-wrap-border']/div[@class='block-games-item-title']/span[1]")));
+        Tournament tour = TournamentHelper.getCurrentTournament(tour_id);
+        assert tour != null;
+        tour.pressPlayButton();
     }
 
-    public static boolean additionalTabsIsVisible() {
-        return driver.findElement(By.xpath("/html/body[@id='body']/div[@class='chart--content _daily _dota']/div[@class='chart--content-abswrap']/div[@class='block-tabssmall js-site-tabs']/div[@class='block-tabssmall-item js-head-tab'][1]")).isDisplayed();
+    public static void pressToTheTab(String tab) {
+        TabsHelper.pressToTheTab(tab);
     }
 
-    public WebDriver getDriver() {
-        return driver;
+    public static void pressToTheAdditionalTab(String tab) {
+        TabsHelper.pressToTheAdditionalTab(tab);
+    }
+
+    public static void openMenuItem(String item) {
+        Menu.openMenuItem(item);
+    }
+
+    public static void pressPlayTutorButton() {
+        wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath(XPath.tutorButton)));
+        WebElement button = driver.findElement(By.xpath(XPath.tutorButton));
+        button.click();
+
+
     }
 }

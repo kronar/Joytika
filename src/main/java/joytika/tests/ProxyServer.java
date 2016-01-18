@@ -17,6 +17,7 @@ public class ProxyServer {
     private static WebDriver driver;
     private static BrowserMobProxy proxyServer;
     private static boolean serverIsStart = false;
+    private static String JOYTIKA = "joytika.com";
 
 
     protected static void start() throws Exception {
@@ -48,10 +49,10 @@ public class ProxyServer {
 
     protected static void doHar() throws Exception {
         if (serverIsStart) {
-            proxyServer.newHar("joytika.com");
+            proxyServer.newHar(JOYTIKA);
         } else {
             start();
-            proxyServer.newHar("joytika.com");
+            proxyServer.newHar(JOYTIKA);
         }
     }
 

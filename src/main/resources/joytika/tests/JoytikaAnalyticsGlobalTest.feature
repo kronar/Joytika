@@ -1,12 +1,44 @@
-Feature: Global Analytics Test
+Feature: Глобальный тест аналитики
 
-  Scenario: Test send action  "tutor_click"  for greeting when Visitor press to play button
-    Given Visitor come and see greeting
-    When Visitor press to play button
-    Then Send action tutor_click with type = first, place = button, page = 1, group = site
+  Scenario: Тест события "tutor_click" при нажатии на кнопку играть на гритинге
+    When Пользователь нажимает на кнопку играть на гритинге
+    Then Отправляется событие с параметрами category = tutor_click, type = first, place = button, group = site
 
-  Scenario: Test send action "tab_click" when Visitor press to the PAST tap
-    Given Visitor came to the site already
-    When Visitor press to the PAST tap
-    Then Send action tab_click with place = past, group = site
+  Scenario: Тест события "tutor_click" при нажатии на кнопку играть на туторе, если вызвали его из меню
+   When Пользователь открывает меню
+    And Нажимает на пункт Правила участия
+    And Нажать кнопку играть на туторе
+    Then Отправляется событие с параметрами category = tutor_click, type = menu, place = button, group = site
 
+  Scenario: Тест события "tab_click", когда визитор нажимает вкладку ПРОШЕДШИЕ
+    When Пользователь нажимает вкладку ПРОШЕДШИЕ
+    Then Отправляется событие с параметрами category = tab_click, place = past, group = site
+
+  Scenario: Тест события "tab_click", когда визитор нажимает вкладку ТЕКУЩИЕ
+    When Пользователь нажимает вкладку ТЕКУЩИЕ
+    Then Отправляется событие с параметрами category = tab_click, place = home, group = site
+
+  Scenario: Тест события "tab_click", когда визитор нажимает вкладку БУДУЩИЕ
+    When Пользователь нажимает вкладку БУДУЩИЕ
+    Then Отправляется событие с параметрами category = tab_click, place = future, group = site
+
+  Scenario: Тест событий "login_click" и "login" когда визитор логинится
+    Given Пользователь не залогинен
+    When Пользователь открывает меню
+    And Нажимает на пункт Мой аккаунт
+    And Нажимает на кнопку "Войти через ВКонтакте" на появившемся окне
+    And Логинится в форме вк с логином 89171090130 и паролем haumlium263 и нажимает войти
+    Then Отправляютя два события. Первое с параметрами category = login_click, place = menu второе с параметрами category = login, type = loginclick
+
+  Scenario: Тест события "pastmode_click", когда визитор нажимает вкладку С моим участием на странице прошедших турниров
+    Given Пользователь нажимает вкладку ПРОШЕДШИЕ
+    When Пользователь нажимает на дополнительную вкладку С моим участием
+    Then Отправляется событие с параметрами category = pastmode_click, place = part, group = site
+
+  Scenario: Тест события "pastmode_click", когда визитор нажимает вкладку Все турниры на странице прошедших турниров
+    When Пользователь нажимает на дополнительную вкладку Все турниры
+    Then Отправляется событие с параметрами category = pastmode_click, place = all, group = site
+
+  Scenario: Тест события "pastmode_click", когда визитор нажимает вкладку Мои победы на странице прошедших турниров
+    When Пользователь нажимает на дополнительную вкладку Мои победы
+    Then Отправляется событие с параметрами category = pastmode_click, place = win, group = site

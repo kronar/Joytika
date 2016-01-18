@@ -7,6 +7,7 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 
 
 public class WebDriverHelper {
+
     private static WebDriver driver;
     private static WebDriverWait wait;
 
@@ -25,6 +26,7 @@ public class WebDriverHelper {
         }
         return driver;
     }
+
 
     public synchronized static WebDriverWait getCurrentDriverWait() {
         if (wait == null) {

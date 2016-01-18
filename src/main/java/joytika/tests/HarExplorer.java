@@ -4,17 +4,15 @@ package joytika.tests;
 import net.lightbody.bmp.core.har.Har;
 import net.lightbody.bmp.core.har.HarEntry;
 
+import javax.annotation.Nullable;
 import javax.validation.constraints.NotNull;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 
 public class HarExplorer {
-    private static final String CATEGORY = "category";
-    private static final String PLACE = "place";
-    private static final String TYPE = "type";
-    private static final String GROUP = "group";
-    private static final String PAGE = "page";
+
 
     private static List<String> getAllJoytikaAnalyticsActions(@NotNull final Har har) {
         String url;
@@ -23,56 +21,35 @@ public class HarExplorer {
         for (HarEntry he : harEntries) {
             url = he.getRequest().getUrl();
             if (url.contains("stats.joytika.com")) {
-                System.out.println();
-                System.out.println(url);
                 analyticsActionUrls.add(url);
             }
         }
+
         return analyticsActionUrls;
     }
 
+    private static boolean checkParameter(@NotNull final String actionUrl, Map<String, String> parameters) {
+        for (String nameParameter : parameters.keySet()) {
+            if (!(actionUrl.contains(nameParameter + "=" + parameters.get(nameParameter)) || actionUrl.contains("[" + nameParameter + "]=" + parameters.get(nameParameter)))) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    public static boolean searchActionWithCategoryPlacePageTypeGroup(Har har, String category, String place, String page, String type, String group) {
+    public static boolean searchActionWithParameters(@NotNull Har har, @Nullable Map<String, String> parameters) {
+
+        if (parameters == null) {
+            return false;
+        }
         List<String> analyticsActionUrls = getAllJoytikaAnalyticsActions(har);
         for (String actionUrl : analyticsActionUrls) {
-            if (!checkParameter(actionUrl, CATEGORY, category)) {
-                continue;
+            if (checkParameter(actionUrl, parameters)) {
+                return true;
             }
-            if (!checkParameter(actionUrl, PLACE, place)) {
-                continue;
-            }
-            if (!checkParameter(actionUrl, TYPE, type)) {
-                continue;
-            }
-            if (!checkParameter(actionUrl, GROUP, group)) {
-                continue;
-            }
-            if (!checkParameter(actionUrl, PAGE, page)) {
-                continue;
-            }
-            return true;
         }
         return false;
     }
 
-    private static boolean checkParameter(@NotNull final String actionUrl, @NotNull final String parameterName, @NotNull final String value) {
-        return actionUrl.contains(parameterName + "=" + value) || actionUrl.contains("[" + parameterName + "]=" + value);
-    }
 
-    public static boolean searchActionWithCategoryPlaceGroup(Har har, String category, String place, String group) {
-        List<String> analyticsActionUrls = getAllJoytikaAnalyticsActions(har);
-        for (String actionUrl : analyticsActionUrls) {
-            if (!checkParameter(actionUrl, CATEGORY, category)) {
-                continue;
-            }
-            if (!checkParameter(actionUrl, PLACE, place)) {
-                continue;
-            }
-            if (!checkParameter(actionUrl, GROUP, group)) {
-                continue;
-            }
-            return true;
-        }
-        return false;
-    }
 }
