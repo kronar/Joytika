@@ -16,7 +16,7 @@ public class Menu {
     }
 
     //menu items
-
+//TODO надо бы доделать
     @FindBy(how = How.XPATH, using = "")
     static WebElement rulesMenuItem;
     @FindBy(how = How.XPATH, using = "")

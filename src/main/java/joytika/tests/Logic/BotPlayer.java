@@ -1,13 +1,14 @@
 package joytika.tests.Logic;
 
 
+import joytika.tests.Driver.WebDriverHelper;
 import org.openqa.selenium.JavascriptExecutor;
 
 public class BotPlayer {
 
 
     public BotPlayer() {
-        JavascriptExecutor js = (JavascriptExecutor) JoytikaHelper.getDriver();
+        JavascriptExecutor js = (JavascriptExecutor) WebDriverHelper.getCurrentDriver();
         js.executeScript("(function() {\n" +
                 "    var screen = document.getElementById(\"screen\");\n" +
                 "    var tapTimes = [];\n" +

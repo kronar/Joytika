@@ -14,12 +14,11 @@ import org.openqa.selenium.WebDriver;
 
 public class StepsInHomePage {
     public static final String SITE = "http://www.joytika.com";
-    private Tournament lastPressedTournament = null;
     WebDriver driver = WebDriverHelper.getCurrentDriver();
 
     @Before
     public void doHar() throws Exception {
-        JoytikaHelper.initIfNot(SITE);
+       // JoytikaHelper.initIfNot(SITE);
         ProxyServer.doHar();
     }
 
@@ -35,6 +34,7 @@ public class StepsInHomePage {
 
     @When("^Пользователь нажимает на кнопку играть на гритинге$")
     public void visitorPressToPlayButton() {
+        driver.get(SITE);
         GreetingWindow.getGreetingWindow(driver).pressPlayButton();
     }
 
@@ -50,7 +50,7 @@ public class StepsInHomePage {
 
     @When("^Логинится в форме вк с логином (.*) и паролем (.*) и нажимает войти$")
     public void visitorLoginToTheSiteWithVKWithUsernameAndPassword(final String username, final String password) {
-        VKLoginPage.Companion.getVKLoginPage(driver).loginInVKLoginForm(username, password);
+        VKLoginPage.getVKLoginPage(driver).loginInVKLoginForm(username, password);
     }
 
     @And("^Нажать кнопку играть на туторе$")
@@ -60,7 +60,7 @@ public class StepsInHomePage {
 
     @And("^Пользователь нажимает на карточку любого турнира$")
     public void pressTournament() throws Throwable {
-        lastPressedTournament = JoytikaHelper.pressTournament();
+       // lastPressedTournament = JoytikaHelper.pressTournament();
     }
 
     @And("^Нажимает на пункт (.*)$")

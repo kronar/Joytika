@@ -16,11 +16,11 @@ public class СucumberSteps {
     private Tournament lastPressedTournament = null;
     WebDriver driver = WebDriverHelper.getCurrentDriver();
 
-    @Before
-    public void doHar() throws Exception {
-        JoytikaHelper.initIfNot(SITE);
-        ProxyServer.doHar();
-    }
+   // @Before
+  //  public void doHar() throws Exception {
+   //     JoytikaHelper.initIfNot(SITE);
+   //     ProxyServer.doHar();
+   /// }
 
 
     @When("^Пользователь нажимает на кнопку Выиграть приз$")
