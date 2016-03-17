@@ -1,4 +1,4 @@
-package joytika.tests;
+package joytika.tests.Logic;
 
 
 import net.lightbody.bmp.core.har.Har;

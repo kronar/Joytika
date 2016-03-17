@@ -1,4 +1,4 @@
-package joytika.tests;
+package joytika.tests.Driver;
 
 
 import org.openqa.selenium.WebDriver;
@@ -20,8 +20,8 @@ public class WebDriverHelper {
             } catch (Exception e) {
                 e.printStackTrace();
             } finally {
-                Runtime.getRuntime().addShutdownHook(
-                        new Thread(new BrowserCleanup()));
+              //  Runtime.getRuntime().addShutdownHook(
+              //          new Thread(new BrowserCleanup()));
             }
         }
         return driver;

@@ -1,4 +1,4 @@
-package joytika.tests;
+package joytika.tests.Logic;
 
 import javax.annotation.Nullable;
 import java.util.HashMap;

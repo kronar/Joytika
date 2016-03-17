@@ -1,4 +1,4 @@
-package joytika.tests;
+package joytika.tests.PageFactory;
 
 public class XPath {
     public static class Greeting {
@@ -56,13 +56,13 @@ public class XPath {
     public static class LoginWindow {
         public final static String loginButton = ".//*[@id='blockLogin']/div/div[4]";
 
-        public static class VKLogin {
-            public final static String vkLoginField = ".//*[@id='box']/div/input[6]";
-            public final static String vkPasswordField = ".//*[@id='box']/div/input[7]";
-            public final static String vkLoginButton = ".//*[@id='install_allow']";
-        }
-    }
 
+    }
+    public static class VKLogin {
+        public final static String vkLoginField = ".//*[@id='box']/div/input[6]";
+        public final static String vkPasswordField = ".//*[@id='box']/div/input[7]";
+        public final static String vkLoginButton = ".//*[@id='install_allow']";
+    }
     public static class MyAccount {
         public final static String logOutButton = "/html/body[@id='body']/div[@class='block-wrapper']/div[@class='block-wrapper-abswrap']/div[@id='Profile']/div[@class='block-profile']/div[@class='block-profile-text']/a[@class='block-profile-text-logout']";
 

@@ -1,4 +1,4 @@
-package joytika.tests;
+package joytika.tests.Driver;
 
 import net.lightbody.bmp.BrowserMobProxy;
 import net.lightbody.bmp.BrowserMobProxyServer;
@@ -47,7 +47,7 @@ public class ProxyServer {
         return driver;
     }
 
-    protected static void doHar() throws Exception {
+    public static void doHar() throws Exception {
         if (serverIsStart) {
             proxyServer.newHar(JOYTIKA);
         } else {
@@ -57,7 +57,7 @@ public class ProxyServer {
     }
 
     @Nullable
-    protected static Har getHar() {
+    public static Har getHar() {
         return serverIsStart ? proxyServer.getHar() : null;
     }
 }
