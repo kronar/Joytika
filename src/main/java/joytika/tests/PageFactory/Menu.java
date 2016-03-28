@@ -17,21 +17,21 @@ public class Menu {
 
     //menu items
 //TODO надо бы доделать
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='Nav-icon _tutor']")
     static WebElement rulesMenuItem;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='ripple Nav-item _noicon ']")
     static WebElement termOfUseMenuItem;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='Nav-icon _home']")
     static WebElement homeMenuItem;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='ripple Nav-item _noicon ']")
     static WebElement securePolicyMenuItem;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='Nav-icon _support']")
     static WebElement supportMenuItem;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='ripple Nav-item _noicon ']")
     static WebElement aboutUsMenuItem;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='Nav-icon _vk']")
     static WebElement vkMenuItem;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='Menu _animation']/div[@class='Menu-body nano _animation has-scrollbar']/div[@class='nano-content']/div[@class='Nav']/a/i[@class='Nav-icon _account']")
     static WebElement myAccountItem;
 
 

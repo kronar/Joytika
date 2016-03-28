@@ -10,9 +10,9 @@ import org.openqa.selenium.support.PageFactory;
 public class TutorWindow {
 
     static WebDriver driver;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='modal-tutor js-tutor _active']/div[@id='blockTutor']/div[@class='block-tutordota-inner typo-padding16']/div[@class='block-tutordota-inner-close windowClose']")
     static WebElement cross;
-    @FindBy(how = How.XPATH, using = "")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='modal-tutor js-tutor _active']/div[@id='blockTutor']/div[@class='block-tutordota-inner typo-padding16']/div[@class='block-tutordota-inner-button']/div[@class='el-button-new windowClose']")
     static WebElement playButton;
     @FindBy(how = How.XPATH, using = "")
     static WebElement leftButton;
@@ -27,6 +27,7 @@ public class TutorWindow {
         cross.click();
     }
     public void playButtonClick(){
+
         playButton.click();
     }
     public void leftButtonClick(){

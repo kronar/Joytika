@@ -1,5 +1,6 @@
 package joytika.tests.PageFactory;
 
+import joytika.tests.Driver.WebDriverHelper;
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -7,6 +8,7 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import org.openqa.selenium.support.How;
 import org.openqa.selenium.support.PageFactory;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 
 public class GreetingWindow {
     private final WebDriver driver;
@@ -19,7 +21,7 @@ public class GreetingWindow {
 
     @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content typo-padding16']/div[@class='block-tutor-inner-close windowClose']")
     static WebElement cross;
-    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _active']/div[@class='block-greetings']/div[@class='nano has-scrollbar']/div[@class='block-greetings-inner nano-content typo-padding16']/div[@class='block-greetings-inner-button']/div[@class='el-button-new windowClose']")
+    @FindBy(how = How.XPATH, using = "/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _active']/div[@class='block-greetings']/div[@class='block-greetings-inner typo-padding16']/div[@class='block-greetings-inner-button']/div[@class='el-button-new windowClose']")
     static WebElement playButton;
 
 
@@ -29,6 +31,7 @@ public class GreetingWindow {
     }
 
     public HomePage pressPlayButton() {
+        WebDriverHelper.getCurrentDriverWait().until(ExpectedConditions.visibilityOfElementLocated(By.xpath("/html/body[@id='body']/div[@class='modal-tutor js-big-tutor _active']/div[@class='block-greetings']/div[@class='block-greetings-inner typo-padding16']/div[@class='block-greetings-inner-button']/div[@class='el-button-new windowClose']")));
         playButton.click();
         return HomePage.getHomePage(driver);
     }
